@@ -7,17 +7,28 @@ class Game(object):
     def __init__(self):
         self.board = -np.ones((3, 3), dtype=int)
         self.player = X
-        self.winner = None
+        self.moves = dict(enumerate([(i,j) for i in range(3) for j in range(3)]))
+        self.valid_moves = self.moves.copy()
 
-    def make_move(self, pos):
-        i, j = pos
-        assert self.board[i][j] == EMPTY
+    def make_move(self, move):
+        assert move in self.valid_moves
         assert not self.is_game_over()
 
+        i, j = self.moves[move]
         self.board[i][j] = self.player
-        if self.is_game_over():
-            self.winner = self.player
         self.player = O if self.player == X else X
+        self.valid_moves.pop(move)
+
+    def undo_move(self, move):
+        assert move not in self.valid_moves
+        self.valid_moves[move] = self.moves[move]
+        i, j = self.moves[move]
+        self.board[i][j] = EMPTY
+        self.player = O if self.player == X else X
+
+    def get_winner(self):
+        assert self.is_game_over()
+        return O if self.player == X else X
 
     def is_game_over(self):
         is_over = any([len(set(row)) <= 1 and EMPTY not in set(row) for row in self.board])
