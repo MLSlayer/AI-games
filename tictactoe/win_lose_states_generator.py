@@ -3,6 +3,7 @@ import pandas as pd
 
 board_to_str = lambda b: ''.join(map(lambda s: str(s), b))
 
+# for when O goes first
 def minimax(game, i, move_confs):
     if game.is_over() and not game.winner_exists():
         return 0
@@ -41,10 +42,23 @@ def minimax(game, i, move_confs):
 
     return max_val if i % 2 == 0 else min_val
 
-game = Game(X)
+game = Game(O)
 move_confs = set()
 minimax(game, 0, move_confs)
 
 move_confs = pd.DataFrame(list(move_confs), columns=["board_state", "score"])
-move_confs.to_csv("human_first_pc_win_lose_states.txt", index=False)
+move_confs.to_csv("q_learning_meta/pc_first_win_lose_states.txt", index=False)
+
+
+# for when X goes first
+game = Game(X)
+move_confs = set()
+valid_moves = game.valid_moves.copy().keys()
+for move in valid_moves:
+    game.make_move(move)
+    minimax(game, 0, move_confs)
+    game.undo_move(move)
+
+move_confs = pd.DataFrame(list(move_confs), columns=["board_state", "score"])
+move_confs.to_csv("q_learning_meta/human_first_win_lose_states.txt", index=False)
 
