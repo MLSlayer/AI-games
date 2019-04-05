@@ -24,7 +24,7 @@ pc_first_win_lose_confs = dict(list(pc_first_win_lose_confs.itertuples(index=Fal
 human_first_win_lose_confs = pd.read_csv("q_learning_meta/human_first_win_lose_states.txt")
 human_first_win_lose_confs = dict(list(human_first_win_lose_confs.itertuples(index=False, name=False)))
 
-epochs = 1500000
+epochs = 300000
 epsilon = .1
 get_random_valid_move = lambda g: random.choice(list(g.valid_moves.keys()))
 get_best_move = lambda q, valid_moves: next(e for e in map(lambda e: e[0], sorted(list(enumerate(q[0])), reverse=True, key=lambda e: e[1])) if e in valid_moves)
@@ -85,8 +85,8 @@ for epoch in range(epochs):
         state = t.Tensor(game.board.reshape(1, -1))
         if game.is_over():
             break
-    if epsilon > 0.01:
-        epsilon -= 1 / epochs
+    if epsilon > 0.05:
+        epsilon -= 2 / epochs
 
 
 t.save(model.state_dict(), "q_learning_meta/model.pth")
