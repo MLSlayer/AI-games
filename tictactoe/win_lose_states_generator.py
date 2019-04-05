@@ -6,8 +6,10 @@ board_to_str = lambda b: ''.join(map(lambda s: str(s), b))
 # for when O goes first
 def minimax(game, i, move_confs):
     if game.is_over() and not game.winner_exists():
+        move_confs.add((board_to_str(game.board.reshape(-1)), 0))
         return 0
     if game.winner_exists():
+        move_confs.add((board_to_str(game.board.reshape(-1)), 1 if game.get_winner() == 0 else -1))
         return 1 if game.get_winner() == O else -1
     valid_moves = game.valid_moves.copy().keys()
     best_move = next(iter(valid_moves))
