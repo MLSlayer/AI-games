@@ -13,7 +13,9 @@ ___
     * Very good, but maybe beatable, haven't wrote a test script
   
 ### Basic usage
-    Load this files up in an IDE and mark AI-games as sources root. Run mini-max.py or q_reinforcement_learning_play.py
+    Load this files up in an IDE and mark AI-games as sources root. 
+    
+    Run mini-max-prune.py or q_reinforcement_learning_play.py
     
     
 ___
