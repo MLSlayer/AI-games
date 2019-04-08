@@ -5,6 +5,7 @@
 ___
 
 ## 1. Tic-Tac-Toe
+#### Difficulty: easy
 * [x] Minimax
   * [x] Pruning 
     * Unbeatable, this is a zero sum game is why.
