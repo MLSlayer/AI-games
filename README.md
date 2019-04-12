@@ -16,7 +16,7 @@ ___
 ### Basic usage
     Load this files up in an IDE and mark AI-games as sources root. 
     
-    Run mini-max-prune.py or q_reinforcement_learning_play.py
+    Run mini_max_prune.py or q_reinforcement_learning_play.py
 ___
 ## 2. Gridworld
 #### Difficulty: easy
