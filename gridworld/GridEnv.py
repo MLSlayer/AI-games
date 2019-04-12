@@ -3,6 +3,7 @@ import numpy as np
 
 UP, RIGHT, DOWN, LEFT = range(4)
 
+
 class GridEnv(discrete.DiscreteEnv):
 
     def __init__(self, nS, nA, P, isd):
@@ -40,7 +41,3 @@ class GridEnv(discrete.DiscreteEnv):
                 P[s][3] = (s, 0, True)
 
         return cls(nS, 4, P, np.ones(nS) / nS)
-
-
-
-

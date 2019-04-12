@@ -1,5 +1,6 @@
 from gridworld.GridEnv import *
 
+
 # our policy is deterministic and our probablity of diff actions upon choosing the deterministic action is 0
 
 def get_state_values(pi, P, gamma=0.9, theta=1e-10):
@@ -28,8 +29,8 @@ def get_state_values(pi, P, gamma=0.9, theta=1e-10):
 
     return V
 
-def improve_policy(pi, V, P, gamma=0.9):
 
+def improve_policy(pi, V, P, gamma=0.9):
     for s in range(len(V)):
         # action value function memo
         Qs = np.zeros(4)
@@ -43,6 +44,7 @@ def improve_policy(pi, V, P, gamma=0.9):
             Qs[a] += value
 
         pi[s] = np.argmax(Qs)
+
 
 game = GridEnv.static()
 pi = [0, 1, 2, 3,
@@ -58,4 +60,3 @@ while True:
         break
 
 print(np.array(pi).reshape(3, 4))
-

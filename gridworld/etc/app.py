@@ -1,4 +1,4 @@
-from gridworld.Grid import *
+from gridworld.etc.Grid import *
 
 game = Grid(True)
 game.print_grid()
@@ -26,4 +26,3 @@ try:
     print("doesn't hit this")
 except AssertionError as e:
     print("hits this")
-
