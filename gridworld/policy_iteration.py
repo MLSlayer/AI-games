@@ -46,6 +46,11 @@ def improve_policy(pi, V, P, gamma=0.9):
         pi[s] = np.argmax(Qs)
 
 
+# GridEnv.static builds the below, p is the person, w is the wall, 1 and -1 are the terminal states
+#       0  0  0  1                                                u d l r
+#       0  w  0 -1     actions/policies in client program ->      u d l r       where u,d,l,r = up,down,left,right
+#       0  0  0  0                                                u d l r       also, w gives reward zero, but I just marked it w to show you its a wall
+
 game = GridEnv.static()
 pi = [0, 1, 2, 3,
       0, 1, 2, 3,
