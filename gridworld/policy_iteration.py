@@ -30,12 +30,12 @@ def get_state_values(pi, P, gamma=0.9, theta=1e-10):
     return V
 
 
-def improve_policy(pi, V, P, gamma=0.9):
+def improve_policy(pi, V, P, nA, gamma=0.9):
     for s in range(len(V)):
         # action value function memo
-        Qs = np.zeros(4)
+        Qs = np.zeros(nA)
 
-        for a in range(4):
+        for a in range(nA):
             new_s, reward, is_done = P[s][a]
             if is_done:
                 value = reward
@@ -48,7 +48,7 @@ def improve_policy(pi, V, P, gamma=0.9):
 
 # GridEnv.static builds the below, p is the person, w is the wall, 1 and -1 are the terminal states
 #       0  0  0  1                                                u d l r
-#       0  w  0 -1     actions/policies in client program ->      u d l r       where u,d,l,r = up,down,left,right
+#       0  w  0 -1     initial policies in client program  ->     u d l r       where u,d,l,r = up,down,left,right
 #       0  0  0  0                                                u d l r       also, w gives reward zero, but I just marked it w to show you its a wall
 
 game = GridEnv.static()
@@ -59,7 +59,7 @@ pi = [0, 1, 2, 3,
 while True:
     prev_pi = pi.copy()
     V = get_state_values(pi, game.P)
-    improve_policy(pi, V, game.P)
+    improve_policy(pi, V, game.P, game.nA)
 
     if prev_pi == pi:
         break

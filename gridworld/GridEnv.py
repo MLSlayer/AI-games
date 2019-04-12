@@ -1,8 +1,8 @@
 from gym.envs.toy_text import discrete
 import numpy as np
 
-UP, RIGHT, DOWN, LEFT = range(4)
-
+NA = 4
+UP, RIGHT, DOWN, LEFT = range(NA)
 
 class GridEnv(discrete.DiscreteEnv):
 
@@ -17,16 +17,17 @@ class GridEnv(discrete.DiscreteEnv):
         #       0  0  0  0                                                u d l r       also, w gives reward zero, but I just marked it w to show you its a wall
         nS = 12
         P = {}
+        nA = NA
 
         for s in range(nS):
             P[s] = {}
             is_wall = lambda p: p == 5
             get_reward = lambda p: 1 if p == 3 else -1 if p == 7 else 0
 
-            top = s if is_wall(s - 4) or s in np.arange(4) else s - 4
-            right = s if is_wall(s + 1) or s % 4 == 3 else s + 1
-            bottom = s if is_wall(s + 4) or s in np.arange(8, 16) else s + 4
-            left = s if is_wall(s - 1) or s % 4 == 0 else s - 1
+            top = s if is_wall(s - nA) or s in np.arange(nA) else s - nA
+            right = s if is_wall(s + 1) or s % nA == 3 else s + 1
+            bottom = s if is_wall(s + nA) or s in np.arange(8, 12) else s + nA
+            left = s if is_wall(s - 1) or s % nA == 0 else s - 1
 
             # breaking the general P pattern, leaving out probabilty and also making the value of P[x][y] a tuple instead of a list
             P[s][0] = (top, get_reward(top), get_reward(top) == 1)
@@ -40,4 +41,4 @@ class GridEnv(discrete.DiscreteEnv):
                 P[s][2] = (s, 0, True)
                 P[s][3] = (s, 0, True)
 
-        return cls(nS, 4, P, np.ones(nS) / nS)
+        return cls(nS, nA, P, np.ones(nS) / nS)
