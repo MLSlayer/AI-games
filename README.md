@@ -21,7 +21,7 @@ ___
 ## 2. Gridworld
 #### Difficulty: easy
 * [x] Policy Iteration
-* [ ] Policy Iteration
+* [ ] Value Iteration
 * [ ] Q-learning (reinforcement)
 * [ ] etc
     * [ ] a* style kind of search alg. May not do because will be tedious so..
