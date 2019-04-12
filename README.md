@@ -17,7 +17,18 @@ ___
     Load this files up in an IDE and mark AI-games as sources root. 
     
     Run mini-max-prune.py or q_reinforcement_learning_play.py
+___
+## 2. Gridworld
+#### Difficulty: easy
+* [x] Policy Iteration
+* [ ] Policy Iteration
+* [ ] Q-learning (reinforcement)
+* [ ] etc
+    * [ ] a* style kind of search alg. May not do because will be tedious so..
+  
+### Basic usage
+    Load this files up in an IDE and mark AI-games as sources root. 
     
-    
+    Run policy_iteration.py
 ___
 
