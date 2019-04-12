@@ -1,4 +1,4 @@
-from Grid import *
+from gridworld.Grid import *
 
 game = Grid(True)
 game.print_grid()

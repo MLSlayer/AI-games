@@ -12,7 +12,7 @@ class GridEnv(discrete.DiscreteEnv):
     def static(cls):
         # static builds the below, p is the person, w is the wall, 1 and -1 are the terminal states
         #       0  0  0  1                                                u d l r
-        #       0  w  0 -1     actions/policies in client program ->      u x l r       where u,d,l,r,x = up,down,left,right,skip-manually-in-code
+        #       0  w  0 -1     actions/policies in client program ->      u d l r       where u,d,l,r = up,down,left,right
         #       0  0  0  0                                                u d l r       also, w gives reward zero, but I just marked it w to show you its a wall
         nS = 12
         P = {}
@@ -33,7 +33,7 @@ class GridEnv(discrete.DiscreteEnv):
             P[s][2] = (bottom, get_reward(bottom), get_reward(bottom) == 1)
             P[s][3] = (left, get_reward(left), get_reward(left) == 1)
 
-            if s == 3 or s == 7:
+            if s == 3 or s == 7 or s == 5:
                 P[s][0] = (s, 0, True)
                 P[s][1] = (s, 0, True)
                 P[s][2] = (s, 0, True)
