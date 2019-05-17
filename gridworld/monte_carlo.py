@@ -33,7 +33,7 @@ def get_state_values_mc(pi, env, gamma=0.9, alpha=0.2, min_alpha=0, alpha_decay_
             visited.add(s)
 
             G = np.sum(discounts[:len(episode) - i] * episode[i:, 2])
-            V[s] = V[s] + alpha * (G - V[s])
+            V[s] += alpha * (G - V[s])
     return V
 
 game = GridEnv.steppable_static()
