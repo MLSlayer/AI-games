@@ -5,7 +5,7 @@ def get_state_values_td(pi, env, gamma=0.9, alpha=0.2, alpha_decay_rate=.0003, m
     V = np.zeros(nS)
 
     for t in range(episodes):
-        alpha = max(min_alpha, np.exp(-alpha_decay_rate * t))
+        alpha = max(min_alpha, alpha * np.exp(-alpha_decay_rate * t))
 
         s = env.reset()
         is_done = False
@@ -15,6 +15,8 @@ def get_state_values_td(pi, env, gamma=0.9, alpha=0.2, alpha_decay_rate=.0003, m
             new_s, reward, is_done, _ = env.step(a)
 
             td_error = reward + gamma * V[new_s] - V[s]
+            if is_done:
+                print()
             V[s] += alpha * td_error
             s = new_s
     return V
@@ -26,7 +28,7 @@ pi = [0, 1, 2, 3,
       0, 1, 2, 3]
 
 
-V = get_state_values_td(pi, game)
+V = get_state_values_td(pi, game, alpha=1)
 print(V)
 
 # less variance, and close to the true state values, the bias isn't that bad either...
