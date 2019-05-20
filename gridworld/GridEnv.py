@@ -91,6 +91,15 @@ class GridEnv(discrete.DiscreteEnv):
         return cls(nS, nA, P, np.ones(nS) / nS)
 
 
+def get_prob_of_success(env, pi, n):
+    win = 0
+    for i in range(n):
+        s, is_done = env.reset(), False
+        while not is_done:
+            s, reward, is_done, _ = env.step(pi[s])
+            if reward == 1:
+                win += 1
+    return win / n
 
 
 
