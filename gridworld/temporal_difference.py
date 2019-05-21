@@ -15,8 +15,6 @@ def get_state_values_td(pi, env, gamma=0.9, alpha=0.2, alpha_decay_rate=.0003, m
             new_s, reward, is_done, _ = env.step(a)
 
             td_error = reward + gamma * V[new_s] - V[s]
-            if is_done:
-                print()
             V[s] += alpha * td_error
             s = new_s
     return V
