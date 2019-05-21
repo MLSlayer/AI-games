@@ -23,6 +23,7 @@ ___
 * [x] Policy Iteration
 * [x] Value Iteration
 * [x] On Policy Monte Carlo Control
+* [x] SARSA / on policy td control
 * [ ] Q-learning (reinforcement)
 * [ ] etc
     * [ ] a* style kind of search alg. May not do because will be tedious so..
