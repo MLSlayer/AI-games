@@ -4,7 +4,11 @@ def sarsa(env, gamma=0.9, alpha=1, min_alpha=.0005, alpha_decay_rate=.0001,
           eps=1, eps_decay_rate=.0001, min_eps=.005, episodes=70000):
     nS, nA = env.nS, env.nA
     Q = np.zeros((nS, nA))
-    select_a_strategy = lambda s, Q, eps: np.argmax(Q[s]) if np.random.rand() > eps else np.random.randint(nA)
+
+    def select_a_strategy(s, Q, eps):
+        if np.random.rand() > eps:
+            return np.argmax(Q[s])
+        return np.random.randint(nA)
 
     for t in range(episodes):
         alpha = min(min_alpha, alpha * np.exp(-alpha_decay_rate * t))
